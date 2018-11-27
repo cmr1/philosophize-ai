@@ -1,31 +1,51 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import api from './lib/api'
 
-
-var Sentencer = require('sentencer');
-
-var sent = Sentencer.make("This sentence has {{ a_noun }} and {{ an_adjective }} {{ noun }} in it.");
+const defaultState = {
+  message: ''
+}
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = defaultState
+    this.loadMessage = this.loadMessage.bind(this)
+  }
+
+  componentDidMount() {
+    this.loadMessage()
+  }
+
+  loadMessage(e) {
+    api.get('message')
+      .then(({ data }) => {
+        this.setState(data)
+      })
+      .catch(console.error)
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>{sent}</p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <h1>philosophize.ai</h1>
+
+          {
+            this.state.message.trim() !== '' && (
+              <p>{this.state.message}</p>
+            )
+          }
+
+          <p style={{ cursor: 'pointer', fontSize: '13px' }}>
+            <span onClick={this.loadMessage}>
+              [reload]
+            </span>
+          </p>
         </header>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
