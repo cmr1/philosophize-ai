@@ -4,4 +4,4 @@ npm install
 
 npm test
 
-GENERATE_SOURCEMAP=false npm run build
+npm run build

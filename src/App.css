@@ -30,3 +30,16 @@
     transform: rotate(360deg);
   }
 }
+
+.App-message {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  margin-top: 25px;
+  border-radius: 10px;
+  font-size: .65em;
+}
+
+.App-form {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  padding-top: 16px;
+}
