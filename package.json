@@ -10,7 +10,17 @@
     "react-spinners": "^0.4.7",
     "reactstrap": "^6.5.0"
   },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  },
   "scripts": {
+    "scan": "npm audit",
+    "scan:fix": "npm audit fix",
+    "scan:fix:force": "npm audit fix --force",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "fix": "npm run scan:fix && npm run lint:fix",
+    "fix:force": "npm run scan:fix:force && npm run lint:fix",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
