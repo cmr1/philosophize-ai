@@ -1,6 +1,6 @@
 setup: init rebuild
 start: up
-rebuild: clean install up
+rebuild: clean install
 
 init:
 	([ ! -e .git/hooks/pre-push ] || rm .git/hooks/pre-push) && ln -s ../../bin/pre-push .git/hooks
