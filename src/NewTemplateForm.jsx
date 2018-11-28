@@ -39,8 +39,8 @@ class NewTemplateForm extends React.Component {
         </FormGroup>
         <FormGroup>
           <Input
-            name="template"
-            type="textarea"
+            name='template'
+            type='textarea'
             rows={4}
             value={this.state.template}
             onChange={(e) => this.updateTemplate(e.target.value)}
