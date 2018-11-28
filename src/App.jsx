@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Container, Row, Col, Button } from 'reactstrap'
+import Loader from './Loader'
 import './App.css'
 import api from './lib/api'
 
@@ -28,6 +30,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Loader />
         <header className="App-header">
           <h1>philosophize.ai</h1>
 
