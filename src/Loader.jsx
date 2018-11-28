@@ -1,7 +1,7 @@
-import React from 'react';
-import { css } from 'react-emotion';
+import React from 'react'
+import { css } from 'react-emotion'
 // First way to import
-import { ClipLoader } from 'react-spinners';
+import { PacmanLoader } from 'react-spinners'
 // Another way to import
 // import ClipLoader from 'react-spinners/ClipLoader';
 
@@ -9,24 +9,16 @@ const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
-`;
+`
 
 class Loader extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: true
-    }
-  }
-  render() {
+  render () {
     return (
-      <div className='sweet-loading'>
-        <ClipLoader
+      <div className='sweet-loading' style={{ margin: '25px 0 0 -25px', minHeight: '100px' }}>
+        <PacmanLoader
           className={override}
-          sizeUnit={"px"}
-          size={150}
-          color={'#123abc'}
-          loading={this.state.loading}
+          color={'#fefefe'}
+          loading={!!this.props.loading}
         />
       </div>
     )

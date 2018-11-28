@@ -13,12 +13,13 @@ import Api from '@bowtie/api'
 // })
 
 const api = new Api({
-  root: 'https://p3l5r3fsod.execute-api.us-east-1.amazonaws.com',
+  root: 'http://localhost:4000',
+  // root: 'https://p3l5r3fsod.execute-api.us-east-1.amazonaws.com',
   stage: 'dev',
   prefix: 'api',
   version: 'v1',
-  secureOnly: process.env.REACT_APP_ENV !== 'development',
-  verbose: process.REACT_APP_ENV !== 'production'
+  secureOnly: false,
+  verbose: true
 })
 
 // Handler for all non 2xx code api responses
