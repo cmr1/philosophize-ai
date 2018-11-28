@@ -6,16 +6,7 @@ import FontAwesome from 'react-fontawesome'
 import {
   Container,
   Row,
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  Badge,
-  Input,
-  Card,
-  CardBody,
-  CardTitle,
-  CardText
+  Col
 } from 'reactstrap'
 
 const defaultState = {
@@ -62,7 +53,7 @@ class App extends Component {
 
     const randReqTime = Math.random() * (this.maxReqTime - this.minReqTime) + this.minReqTime
 
-    api.get('generate')
+    api.get('messages/generate')
       .then(({ data }) => {
         setTimeout(() => {
           this.setState({ message: data.body })
@@ -123,47 +114,6 @@ class App extends Component {
                 </Row>
               )
             }
-            <Row>
-              <Col>
-                <Form className='App-form' onSubmit={this.submitTemplate}>
-                  <FormGroup>
-                    <Card className='bg-info'>
-                      <CardBody>
-                        <CardTitle>
-                          Create your own using:
-                        </CardTitle>
-                        <CardText className='small d-flex justify-content-around'>
-                          {
-                            this.state.actions.map((action, index) => (
-                              <Badge
-                                key={index}
-                                style={{ cursor: 'pointer' }}
-                                onClick={(e) => this.addAction(action)}>
-                                {action}
-                              </Badge>
-                            ))
-                          }
-                        </CardText>
-                      </CardBody>
-                    </Card>
-                  </FormGroup>
-                  <FormGroup>
-                    <Input
-                      name="template"
-                      type="textarea"
-                      rows={4}
-                      value={this.state.template}
-                      onChange={(e) => this.updateTemplate(e.target.value)}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Button block color='success' size='lg' onClick={this.submitTemplate}>
-                      Submit Template
-                    </Button>
-                  </FormGroup>
-                </Form>
-              </Col>
-            </Row>
           </Container>
         </header>
       </div>
