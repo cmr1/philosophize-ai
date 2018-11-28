@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Loader from './Loader'
 import './App.css'
 import api from './lib/api'
+import FontAwesome from 'react-fontawesome'
 import {
   Container,
   Row,
@@ -33,7 +34,6 @@ class App extends Component {
 
     this.minReqTime = 500
     this.maxReqTime = 2000
-    this.rndReqTime = Math.random() * (this.maxReqTime - this.minReqTime) + this.minReqTime
 
     this.addAction = this.addAction.bind(this)
     this.updateMessage = this.updateMessage.bind(this)
@@ -60,12 +60,14 @@ class App extends Component {
   loadMessage (e) {
     this.setState({ loading: true })
 
+    const randReqTime = Math.random() * (this.maxReqTime - this.minReqTime) + this.minReqTime
+
     api.get('message')
       .then(({ data }) => {
         setTimeout(() => {
           this.setState(data)
           this.setState({ loading: false })
-        }, this.rndReqTime)
+        }, randReqTime)
       })
       .catch(console.error)
   }
@@ -94,7 +96,20 @@ class App extends Component {
       <div className='App'>
         <header className='App-header'>
           <Container>
-            <h1>philosophize.ai</h1>
+            <h1>
+              philosophize.ai
+              &nbsp;
+              {
+                !this.state.loading && (
+                  <FontAwesome
+                    name='undo'
+                    style={{ cursor: 'pointer' }}
+                    className='small text-success'
+                    onClick={this.loadMessage}
+                  />
+                )
+              }
+            </h1>
             {
               this.state.loading ? (
                 <Loader loading={this.state.loading} />
