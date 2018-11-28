@@ -3,23 +3,13 @@ import Api from '@bowtie/api'
 /**
  * Init API from ENV
  */
-// const api = new Api({
-//   root: process.env.REACT_APP_API_ROOT_URL,
-//   stage: process.env.REACT_APP_API_STAGE,
-//   prefix: process.env.REACT_APP_API_PREFIX,
-//   version: process.env.REACT_APP_API_VERSION,
-//   secureOnly: process.env.NODE_ENV !== 'development',
-//   verbose: process.NODE_ENV !== 'production'
-// })
-
 const api = new Api({
-  root: 'http://localhost:4000',
-  // root: 'https://p3l5r3fsod.execute-api.us-east-1.amazonaws.com',
-  stage: 'dev',
-  prefix: 'api',
-  version: 'v1',
-  secureOnly: false,
-  verbose: true
+  root: process.env.REACT_APP_API_ROOT_URL,
+  stage: process.env.REACT_APP_API_STAGE,
+  prefix: process.env.REACT_APP_API_PREFIX,
+  version: process.env.REACT_APP_API_VERSION,
+  secureOnly: process.env.NODE_ENV !== 'development',
+  verbose: process.env.NODE_ENV !== 'production'
 })
 
 // Handler for all non 2xx code api responses

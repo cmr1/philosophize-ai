@@ -1,7 +1,13 @@
 #!/bin/bash
 
+APP_ENV=staging
+
+if [ "$BRANCH" == "production" ]; then
+  APP_ENV=production
+fi
+
 npm install
 
 npm test
 
-GENERATE_SOURCEMAP=false npm run build
+APP_ENV=$APP_ENV npm run build

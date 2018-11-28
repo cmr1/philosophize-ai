@@ -62,10 +62,10 @@ class App extends Component {
 
     const randReqTime = Math.random() * (this.maxReqTime - this.minReqTime) + this.minReqTime
 
-    api.get('message')
+    api.get('generate')
       .then(({ data }) => {
         setTimeout(() => {
-          this.setState(data)
+          this.setState({ message: data.body })
           this.setState({ loading: false })
         }, randReqTime)
       })
@@ -120,48 +120,50 @@ class App extends Component {
                       {this.state.message}
                     </pre>
                   </Col>
-
-                  <Col md={{ size: 8, offset: 2 }} lg={{ size: 6, offset: 3 }}>
-                    <Form className='App-form' onSubmit={this.submitTemplate}>
-                      <FormGroup>
-                        <Card className='bg-info'>
-                          <CardBody>
-                            <CardTitle>
-                              Create your own
-                            </CardTitle>
-                            <CardText className='small d-flex justify-content-between'>
-                              {
-                                this.state.actions.map((action, index) => (
-                                  <Badge
-                                    key={index}
-                                    style={{ cursor: 'pointer' }}
-                                    onClick={(e) => this.addAction(action)}>
-                                    {action}
-                                  </Badge>
-                                ))
-                              }
-                            </CardText>
-                          </CardBody>
-                        </Card>
-                      </FormGroup>
-                      <FormGroup>
-                        <Input
-                          name="template"
-                          type="textarea"
-                          value={this.state.template}
-                          onChange={(e) => this.updateTemplate(e.target.value)}
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <Button block color='success' size='lg' onClick={this.submitTemplate}>
-                          Submit Template
-                        </Button>
-                      </FormGroup>
-                    </Form>
-                  </Col>
                 </Row>
               )
             }
+            <Row>
+              <Col>
+                <Form className='App-form' onSubmit={this.submitTemplate}>
+                  <FormGroup>
+                    <Card className='bg-info'>
+                      <CardBody>
+                        <CardTitle>
+                          Create your own using:
+                        </CardTitle>
+                        <CardText className='small d-flex justify-content-around'>
+                          {
+                            this.state.actions.map((action, index) => (
+                              <Badge
+                                key={index}
+                                style={{ cursor: 'pointer' }}
+                                onClick={(e) => this.addAction(action)}>
+                                {action}
+                              </Badge>
+                            ))
+                          }
+                        </CardText>
+                      </CardBody>
+                    </Card>
+                  </FormGroup>
+                  <FormGroup>
+                    <Input
+                      name="template"
+                      type="textarea"
+                      rows={4}
+                      value={this.state.template}
+                      onChange={(e) => this.updateTemplate(e.target.value)}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Button block color='success' size='lg' onClick={this.submitTemplate}>
+                      Submit Template
+                    </Button>
+                  </FormGroup>
+                </Form>
+              </Col>
+            </Row>
           </Container>
         </header>
       </div>

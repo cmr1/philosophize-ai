@@ -5,6 +5,7 @@
   "dependencies": {
     "@bowtie/api": "^0.5.1",
     "bootstrap": "^4.1.3",
+    "dotenv": "^6.1.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-fontawesome": "^1.6.1",
@@ -23,7 +24,9 @@
     "lint:fix": "standard --fix",
     "fix": "npm run scan:fix && npm run lint:fix",
     "fix:force": "npm run scan:fix:force && npm run lint:fix",
+    "prestart": "node bin/pre-start",
     "start": "react-scripts start",
+    "prebuild": "node bin/pre-build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
