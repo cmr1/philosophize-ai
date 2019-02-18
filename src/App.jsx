@@ -6,14 +6,28 @@ import FontAwesome from 'react-fontawesome'
 import {
   Container,
   Row,
-  Col
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Badge,
+  Input,
+  Card,
+  CardBody,
+  CardTitle,
+  CardText
 } from 'reactstrap'
 
 const defaultState = {
   loading: false,
   template: 'This sentence has {{ a_noun }} and {{ an_adjective }} {{ noun }} in it.',
   message: '',
-  actions: [],
+  actions: [
+    'noun',
+    'a_noun',
+    'adjective',
+    'an_adjective'
+  ],
   errors: []
 }
 
@@ -53,7 +67,7 @@ class App extends Component {
 
     const randReqTime = Math.random() * (this.maxReqTime - this.minReqTime) + this.minReqTime
 
-    api.get('messages/generate')
+    api.post('messages', { template_id: '6a4b86a0-07f4-11e9-8b4e-99caf0cabd4f' })
       .then(({ data }) => {
         setTimeout(() => {
           this.setState({ message: data.body })
@@ -66,20 +80,14 @@ class App extends Component {
   submitTemplate (e) {
     e.preventDefault()
 
-    const body = {
-      template: this.state.template
-    }
+    this.setState({ loading: true })
 
-    console.log('submitting template', body)
-
-    // this.setState({ loading: true })
-
-    // api.post('templates', body)
-    //   .then(({ data }) => {
-    //     console.log('created template!', data)
-    //     this.setState({ loading: false })
-    //   })
-    //   .catch(console.error)
+    api.post('templates', { body: this.state.template })
+      .then(({ data }) => {
+        console.log('created template!', data)
+        this.setState({ loading: false })
+      })
+      .catch(console.error)
   }
 
   render () {
@@ -114,6 +122,44 @@ class App extends Component {
                 </Row>
               )
             }
+            <hr />
+            <Form className='App-form' onSubmit={this.submitTemplate}>
+              <FormGroup>
+                <Card className='bg-info'>
+                  <CardBody>
+                    <CardTitle>
+                      Create your own using:
+                    </CardTitle>
+                    <CardText className='small d-flex justify-content-around'>
+                      {
+                        this.state.actions.map((action, index) => (
+                          <Badge
+                            key={index}
+                            style={{ cursor: 'pointer' }}
+                            onClick={(e) => this.addAction(action)}>
+                            {action}
+                          </Badge>
+                        ))
+                      }
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  name='template'
+                  type='textarea'
+                  rows={4}
+                  value={this.state.template}
+                  onChange={(e) => this.updateTemplate(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Button block color='success' size='lg' onClick={this.submitTemplate}>
+                  Submit Template
+                </Button>
+              </FormGroup>
+            </Form>
           </Container>
         </header>
       </div>
