@@ -67,7 +67,7 @@ class App extends Component {
 
     const randReqTime = Math.random() * (this.maxReqTime - this.minReqTime) + this.minReqTime
 
-    api.post('messages', { template_id: '6a4b86a0-07f4-11e9-8b4e-99caf0cabd4f' })
+    api.post('messages')
       .then(({ data }) => {
         setTimeout(() => {
           this.setState({ message: data.body })
@@ -85,7 +85,13 @@ class App extends Component {
     api.post('templates', { body: this.state.template })
       .then(({ data }) => {
         console.log('created template!', data)
-        this.setState({ loading: false })
+
+        api.post('messages', { template_id: data.id })
+          .then(({ data }) => {
+            this.setState({ message: data.body })
+            this.setState({ loading: false })
+          })
+          .catch(console.error)
       })
       .catch(console.error)
   }
