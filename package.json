@@ -24,7 +24,7 @@
     "lint:fix": "standard --fix",
     "fix": "npm run scan:fix && npm run lint:fix",
     "fix:force": "npm run scan:fix:force && npm run lint:fix",
-    "pretest": "npm run scan && npm run lint",
+    "pretest": "npm run lint",
     "dev": "REACT_APP_API_ROOT_URL=http://localhost:4000 npm start",
     "start": "react-scripts start",
     "build": "react-scripts build",
